@@ -5,6 +5,7 @@ import React from "react";
 import styled from "styled-components";
 
 export default function Header() {
+  console.log("hello");
   return (
     <HeadereWrapper>
       <SearchInput />
