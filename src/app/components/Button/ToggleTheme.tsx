@@ -1,4 +1,3 @@
-import SunIcons from "@app/components/icons/SunIcons";
 import { setThemeMode } from "@app/store/themeMode";
 import React from "react";
 import { Dropdown } from "react-bootstrap";

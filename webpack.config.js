@@ -1,5 +1,6 @@
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+// const ESLintPlugin = require("eslint-webpack-plugin");
 
 module.exports = {
   entry: "./src/index.tsx", // Gunakan file entry TypeScript
@@ -15,7 +16,7 @@ module.exports = {
     open: true,
   },
   resolve: {
-    extensions: [".ts", ".tsx", ".js"],
+    extensions: [".ts", ".tsx", ".js", ".jsx"],
     alias: {
       "@app": path.resolve(__dirname, "src/app"), // Pastikan mengarah ke 'src/app'
     },

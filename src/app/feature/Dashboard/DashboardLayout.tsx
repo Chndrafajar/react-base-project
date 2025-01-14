@@ -1,7 +1,6 @@
-import Header from "@app/components/Header";
+import Header from "@app/feature/Dashboard/Header";
 import Sidebar from "@app/feature/Dashboard/Sidebar";
 import React from "react";
-import { Outlet } from "react-router-dom";
 import styled from "styled-components";
 
 export default function DashboardLayout({ children }: any) {
