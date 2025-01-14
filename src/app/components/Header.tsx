@@ -19,6 +19,6 @@ const HeadereWrapper = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  height: 5rem;
+  height: 4.5rem;
   padding: 0 1.25rem;
 `;
