@@ -1,12 +1,18 @@
 import React from "react";
 import styled from "styled-components";
+import { useForm } from "react-hook-form";
 
-export default function SearchInput() {
+interface ISearch {
+  placeholder?: string;
+  register?: any;
+}
+
+export default function SearchInput({ placeholder, register }: ISearch) {
   return (
     <>
       <InputWrapper>
         <i className="ph-bold ph-magnifying-glass"></i>
-        <input type="text" placeholder="search...." />
+        <input type="text" placeholder={placeholder} {...register} />
       </InputWrapper>
     </>
   );

@@ -10,7 +10,7 @@ export default function DashboardLayout({ children }: any) {
         <Sidebar />
         <main style={{ width: "100%" }}>
           <Header />
-          <Content>{children}</Content>
+          <Content className="content-dash">{children}</Content>
         </main>
       </Dflex>
     </>

@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 import "./styles/scss/bootstrap.scss";
 import { Route, Routes } from "react-router-dom";
 import DashboardPage from "@app/pages/Dashboard/DashboardPage";
+import { Notifications } from "react-push-notification";
 
 export default function App() {
   // const dispatch = useDispatch();
@@ -53,6 +54,7 @@ export default function App() {
     //   <TableDynamic apiService={apiService} method={method} columns={columns} />
     // </Container>
     <>
+      <Notifications />
       <Routes>
         <Route path="" element={<DashboardPage />} />
       </Routes>

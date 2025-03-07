@@ -4,7 +4,7 @@ import styled from "styled-components";
 export default function Sidebar() {
   return (
     <>
-      <SidebarWrapper>
+      <SidebarWrapper className="sidebar">
         <HeaderLogo>
           <h5>Alfandhi</h5>
         </HeaderLogo>

@@ -5,6 +5,20 @@
   font-family: "Poppins", sans-serif;
 }
 
+body.dark-mode .sidebar {
+  background: #1d1d1d;
+  border-right: 1px solid #262626;
+}
+
+body.dark-mode .header-dash {
+  background: #1d1d1d;
+  border-bottom: 1px solid #262626;
+}
+
+body.dark-mode .content-dash {
+  background: #171717;
+}
+
 body.dark-mode {
   background-color: #121212;
   color: #ffffff;
@@ -29,8 +43,8 @@ body.dark-mode .table > :not(caption) > * > * {
 }
 
 body.dark-mode .dropdown-menu.show {
-  background-color: #070720;
-  border: 1px solid #1e1e37;
+  background: #1d1d1d;
+  border: 1px solid #262626;
 }
 
 body::-webkit-scrollbar {
