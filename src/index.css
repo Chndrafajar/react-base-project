@@ -84,7 +84,6 @@ body::-webkit-scrollbar-thumb:hover {
 
 .page-link {
   padding: 8px 12px;
-  border: 1px solid #007bff;
   color: #007bff;
   border-radius: 5px;
   text-decoration: none;
@@ -92,8 +91,7 @@ body::-webkit-scrollbar-thumb:hover {
 }
 
 .page-link:hover {
-  background-color: #007bff;
-  color: #fff;
+  /* color: #fff; */
 }
 
 .active .page-link {

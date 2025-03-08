@@ -6,12 +6,11 @@ const getInitialTheme = () => {
     return savedTheme;
   }
 
-  // Jika tidak ada preferensi tersimpan, default ke "system"
   return "system";
 };
 
 const initialState = {
-  themeMode: getInitialTheme(), // light, dark, or system
+  themeMode: getInitialTheme(),
 };
 
 const themeModeSlice = createSlice({

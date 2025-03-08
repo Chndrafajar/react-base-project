@@ -5,6 +5,7 @@ import { Route, Routes } from "react-router-dom";
 import { Notifications } from "react-push-notification";
 import DashboardLayout from "@app/feature/Dashboard/DashboardLayout";
 import UserManagamentRouting from "@app/pages/UserManagement/UserManagamentRouting";
+import { ToastContainer } from "react-toastify";
 
 export default function App() {
   // const dispatch = useDispatch();
@@ -35,6 +36,7 @@ export default function App() {
   return (
     <>
       <Notifications />
+      <ToastContainer />
       <Routes>
         <Route path="" element={<DashboardLayout />}>
           <Route

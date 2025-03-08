@@ -1,35 +1,88 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, JSX } from "react";
 import axios from "axios";
-import { Table, Spinner, Form } from "react-bootstrap";
+import { Table, Spinner, Form, Modal, Button } from "react-bootstrap";
 import ReactPaginate from "react-paginate";
 import axiosInstance from "@app/axios/axiosInstance";
 import { Dflex, DflexJustifyBetween } from "@app/components/display.style";
 import Skeleton from "react-loading-skeleton";
+import { toast } from "react-toastify";
+
+interface Column {
+  key: string;
+  label: string;
+  render?: (row: any) => JSX.Element; // Tambahkan ini agar bisa menerima fungsi render
+}
 
 interface TableProps {
   endpoint: string;
-  columns: { key: string; label: string }[];
+  columns: Column[];
+  dataAction?: any;
+  idParams?: any;
+  setDataAction?: any;
+  customLabel?: string;
 }
 
-const DataTable: React.FC<TableProps> = ({ endpoint, columns }) => {
+const DataTable: React.FC<TableProps> = ({
+  endpoint,
+  columns,
+  dataAction,
+  setDataAction,
+  idParams,
+  customLabel = "",
+}) => {
   const [data, setData] = useState<any[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [page, setPage] = useState<number>(1);
   const [totalPages, setTotalPages] = useState<number>(1);
   const [pageSize, setPageSize] = useState<number>(10);
+  const [showModal, setShowModal] = useState(false);
+
+  const handleClose = () => {
+    setShowModal(false);
+    setDataAction("");
+  };
+  const handleShow = () => setShowModal(true);
 
   useEffect(() => {
     fetchData(page, pageSize);
   }, [page, pageSize]);
 
+  useEffect(() => {
+    if (dataAction === "modal.delete") {
+      setShowModal(true);
+    }
+  }, [dataAction, idParams]);
+
+  const deleteData = async () => {
+    if (dataAction !== "modal.delete") {
+      console.log("Aksi tidak valid:", dataAction);
+      return;
+    }
+
+    setLoading(true);
+    try {
+      const resp = await axiosInstance.delete(`${endpoint}/delete/${idParams}`);
+      console.log(resp, "ini resp");
+      toast.success(`Sukses Delete Data ${customLabel}`);
+      fetchData(page, pageSize);
+      handleClose();
+    } catch (error) {
+      console.error(error);
+      toast.error(`${error}`);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   const fetchData = async (page: number, pageSize: number) => {
     setLoading(true);
     try {
-      const response = await axiosInstance.get(`${endpoint}?page=${page}&limit=${pageSize}`);
+      const response = await axiosInstance.get(`${endpoint}/get?page=${page}&limit=${pageSize}`);
       setData(response.data.users || response.data.data);
       setTotalPages(response.data.totalPages);
     } catch (error) {
       console.error("Error fetching data", error);
+      toast.error(`${error}`);
     } finally {
       setLoading(false);
     }
@@ -84,21 +137,25 @@ const DataTable: React.FC<TableProps> = ({ endpoint, columns }) => {
           </tbody>
         </Table>
       ) : (
-        <Table bordered hover>
+        <Table bordered>
           <thead>
             <tr>
-              <th>#</th>
-              {columns.map((col) => (
+              <th>
+                <Dflex style={{ justifyContent: "center" }}>#</Dflex>
+              </th>
+              {columns?.map((col: any) => (
                 <th key={col.key}>{col.label}</th>
               ))}
             </tr>
           </thead>
           <tbody>
-            {data.map((item, index) => (
-              <tr key={item._id || index}>
-                <td>{index + 1}</td>
-                {columns.map((col) => (
-                  <td key={col.key}>{item[col.key]}</td>
+            {data.map((row, index) => (
+              <tr key={index}>
+                <td>
+                  <Dflex style={{ justifyContent: "center" }}>{index + 1}</Dflex>
+                </td>
+                {columns?.map((col: any) => (
+                  <td key={col.key}>{col.render ? col.render(row) : row[col.key]}</td>
                 ))}
               </tr>
             ))}
@@ -113,8 +170,8 @@ const DataTable: React.FC<TableProps> = ({ endpoint, columns }) => {
           <option value="50">50</option>
         </Form.Select>
         <ReactPaginate
-          previousLabel={"Previous"}
-          nextLabel={"Next"}
+          previousLabel={"<"}
+          nextLabel={">"}
           breakLabel={"..."}
           pageCount={totalPages}
           marginPagesDisplayed={2}
@@ -132,6 +189,20 @@ const DataTable: React.FC<TableProps> = ({ endpoint, columns }) => {
           activeClassName={"active"}
         />
       </DflexJustifyBetween>
+      <Modal show={showModal} onHide={handleClose} centered>
+        <Modal.Header closeButton>
+          <Modal.Title>Konfirmasi Hapus</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>Apakah Anda yakin ingin menghapus data ini? Tindakan ini tidak dapat dibatalkan.</Modal.Body>
+        <Modal.Footer>
+          <Button variant="outline" onClick={handleClose}>
+            Batal
+          </Button>
+          <Button variant="danger" onClick={deleteData} disabled={loading}>
+            {loading ? <Spinner animation="border" size="sm" /> : "Ya, Hapus"}
+          </Button>
+        </Modal.Footer>
+      </Modal>
     </div>
   );
 };

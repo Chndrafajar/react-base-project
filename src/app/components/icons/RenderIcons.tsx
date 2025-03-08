@@ -2,7 +2,7 @@ import React from "react";
 
 interface Props {
   iconName: any;
-  iconStyle: any;
+  iconStyle?: any;
   iconSize?: any;
   iconColor?: any;
 }
@@ -10,7 +10,10 @@ interface Props {
 export default function RenderIcons({ iconName, iconStyle, iconSize, iconColor }: Props) {
   return (
     <>
-      <i className={`ph-${iconStyle} ph-${iconName}`} style={{ fontSize: iconSize, color: iconColor }}></i>
+      <i
+        className={`${iconStyle ? `ph-${iconStyle}` : "ph"} ph-${iconName}`}
+        style={{ fontSize: iconSize, color: iconColor }}
+      ></i>
     </>
   );
 }

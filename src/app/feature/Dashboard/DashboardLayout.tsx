@@ -1,6 +1,7 @@
 import Header from "@app/feature/Dashboard/Header";
 import Sidebar from "@app/feature/Dashboard/Sidebar";
 import React, { useState } from "react";
+import { Container } from "react-bootstrap";
 import { Outlet } from "react-router-dom";
 import styled from "styled-components";
 
@@ -9,7 +10,7 @@ export default function DashboardLayout() {
 
   return (
     <>
-      <Dflex>
+      <ContentDashStyled>
         <Sidebar activeBars={activeBars} setActiveBars={setActiveBars} />
         <main style={{ width: "100%" }}>
           <Header activeBars={activeBars} setActiveBars={setActiveBars} />
@@ -17,19 +18,29 @@ export default function DashboardLayout() {
             <Outlet />
           </Content>
         </main>
-      </Dflex>
+      </ContentDashStyled>
     </>
   );
 }
 
-const Dflex = styled.div`
+const ContentDashStyled = styled.div`
   display: flex;
+  height: 100vh;
+  background: #f9fafb;
 `;
 
-const Content = styled.div`
+const Content = styled(Container)`
   padding: 1.533rem;
-  height: 90vh;
   /* max-height: 80vh; */
-  background: #f9fafb;
+  /* background: #f9fafb; */
   width: 100%;
+  height: 90vh;
+  overflow-x: hidden;
+
+  &::-webkit-scrollbar {
+    width: 0px;
+  }
+
+  @media screen {
+  }
 `;

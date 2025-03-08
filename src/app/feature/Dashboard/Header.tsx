@@ -8,6 +8,9 @@ export default function Header({ activeBars, setActiveBars }: any) {
   return (
     <HeaderWrapper>
       <DFlexJBetween>
+        <BoxSidebar onClick={() => setActiveBars(!activeBars)} className={activeBars ? "active" : ""}>
+          <RenderIcons iconName={`${activeBars ? "caret-right" : "caret-left"}`} iconSize="20px" />
+        </BoxSidebar>
         <BarsIcons>
           <div onClick={() => setActiveBars(!activeBars)}>
             <RenderIcons iconName="list" iconStyle="bold" iconSize="20px" />
@@ -30,6 +33,27 @@ export default function Header({ activeBars, setActiveBars }: any) {
     </HeaderWrapper>
   );
 }
+
+const BoxSidebar = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.233rem;
+  width: 25px;
+  height: 25px;
+  background: #f9fafb;
+  border: 1px solid #e2e2e2;
+  cursor: pointer;
+  transition: all 0.4s ease;
+
+  &.active {
+    transition: 0.4s ease;
+  }
+
+  @media (max-width: 768px) {
+    display: none;
+  }
+`;
 
 const HeaderWrapper = styled.div`
   height: 5rem;

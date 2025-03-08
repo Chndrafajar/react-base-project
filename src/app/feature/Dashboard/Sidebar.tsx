@@ -55,18 +55,16 @@ const SidebarWrapper = styled.div`
   height: 100%;
   border-right: 1px solid #e2e2e2;
   background-color: #fff;
+  transition: all 0.4s ease;
+  &.active {
+    width: 80px;
+    transition: 0.4s ease;
+  }
 
   @media print {
     display: none;
   }
 
-  @media (max-width: 992px) {
-    transition: all 0.4s ease;
-    &.active {
-      width: 80px;
-      transition: 0.4s ease;
-    }
-  }
   @media (max-width: 768px) {
     position: absolute;
     transition: 0.4s ease;
@@ -110,10 +108,8 @@ const HeaderSidebar = styled.div`
   align-items: center;
   background-color: inherit;
   border-bottom: 1px solid #e2e2e2;
-  @media (max-width: 992px) {
-    &.active {
-      padding: 0 16.7px;
-    }
+  &.active {
+    padding: 0 16.7px;
   }
   @media (max-width: 768px) {
     &.active {
@@ -127,44 +123,42 @@ const SidebarLink = styled.ul`
   padding: 0 1.25rem;
   margin-top: 1.25rem;
 
-  @media (max-width: 992px) {
-    &.active {
-      padding: 0 1.25rem;
+  &.active {
+    padding: 0 1.25rem;
 
-      li {
-        a {
-          padding: 0 6.5px;
-          width: 34px;
-          height: 34px;
-          margin-bottom: 8px;
-          display: flex;
-          align-items: center;
-          /* justify-content: center; */
-          border-radius: 50%;
-          color: #787878;
+    li {
+      a {
+        padding: 0 6.5px;
+        width: 34px;
+        height: 34px;
+        margin-bottom: 8px;
+        display: flex;
+        align-items: center;
+        /* justify-content: center; */
+        border-radius: 50%;
+        color: #787878;
+
+        span {
+          /* display: none; */
+          position: absolute;
+          margin-left: 60px;
+          text-align: left;
+          opacity: 0;
+        }
+        &:hover {
+          background: #3772f0;
+          transition: all 0.3s ease;
+          color: #fff;
 
           span {
-            /* display: none; */
-            position: absolute;
-            margin-left: 60px;
-            text-align: left;
-            opacity: 0;
+            opacity: 1;
           }
-          &:hover {
-            background: #3772f0;
-            transition: all 0.3s ease;
-            color: #fff;
-
-            span {
-              opacity: 1;
-            }
-          }
-          &.active {
-            background-color: #3772f0;
-            color: #fff;
-            span {
-              display: none;
-            }
+        }
+        &.active {
+          background-color: #3772f0;
+          color: #fff;
+          span {
+            display: none;
           }
         }
       }
@@ -255,10 +249,8 @@ const SubMenuTitle = styled.h5`
   font-weight: 500;
   padding: 0px 20px;
   margin-top: 20px;
-  @media (max-width: 992px) {
-    &.active {
-      padding: 0 17px;
-    }
+  &.active {
+    padding: 0 17px;
   }
   @media (max-width: 768px) {
     &.active {
@@ -281,14 +273,12 @@ const DFlexColumnSidebar = styled.div`
     color: #787878;
   }
 
-  @media (max-width: 992px) {
-    &.active {
-      h5 {
-        display: none;
-      }
-      span {
-        display: none;
-      }
+  &.active {
+    h5 {
+      display: none;
+    }
+    span {
+      display: none;
     }
   }
   @media (max-width: 768px) {
