@@ -3,6 +3,7 @@ import ReactDOM from "react-dom/client"; // Import dari 'react-dom/client'
 import App from "./App";
 import { Provider } from "react-redux";
 import store from "@app/store/store";
+import "react-loading-skeleton/dist/skeleton.css";
 import "./index.css";
 import { BrowserRouter } from "react-router-dom";
 

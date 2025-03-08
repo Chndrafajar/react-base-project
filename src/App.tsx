@@ -1,9 +1,10 @@
-import React, { useEffect } from "react";
+import React, { Suspense, useEffect } from "react";
 import { useSelector } from "react-redux";
 import "./styles/scss/bootstrap.scss";
 import { Route, Routes } from "react-router-dom";
-import DashboardPage from "@app/pages/Dashboard/DashboardPage";
 import { Notifications } from "react-push-notification";
+import DashboardLayout from "@app/feature/Dashboard/DashboardLayout";
+import UserManagamentRouting from "@app/pages/UserManagement/UserManagamentRouting";
 
 export default function App() {
   // const dispatch = useDispatch();
@@ -31,32 +32,20 @@ export default function App() {
     };
   }, [themeMode]);
 
-  console.log("hello");
-
-  // const apiService = "https://jsonplaceholder.typicode.com/users"; // Example API
-  // const method = "GET"; // Request method
-  // const columns = [
-  //   { header: "ID", accessor: "id" },
-  //   { header: "Name", accessor: "name" },
-  //   { header: "Email", accessor: "email" },
-  //   { header: "Username", accessor: "username" },
-  //   { header: "Phone", accessor: "phone" },
-  // ];
-
   return (
-    // <Container className="mt-4">
-    //   <div>
-    //     <ToggleTheme />
-    //     <p className="mt-2">
-    //       Mode saat ini: <strong>{themeMode}</strong>
-    //     </p>
-    //   </div>
-    //   <TableDynamic apiService={apiService} method={method} columns={columns} />
-    // </Container>
     <>
       <Notifications />
       <Routes>
-        <Route path="" element={<DashboardPage />} />
+        <Route path="" element={<DashboardLayout />}>
+          <Route
+            path="user/*"
+            element={
+              <Suspense>
+                <UserManagamentRouting />
+              </Suspense>
+            }
+          ></Route>
+        </Route>
       </Routes>
     </>
   );

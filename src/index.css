@@ -68,3 +68,41 @@ body::-webkit-scrollbar-thumb:hover {
   border-radius: 30px;
   background: #555;
 }
+
+/* pagination */
+.pagination {
+  display: flex;
+  list-style: none;
+  justify-content: center;
+  /* padding: 10px 0; */
+  margin-bottom: 0 !important;
+}
+
+.page-item {
+  margin: 0 5px;
+}
+
+.page-link {
+  padding: 8px 12px;
+  border: 1px solid #007bff;
+  color: #007bff;
+  border-radius: 5px;
+  text-decoration: none;
+  transition: background-color 0.3s;
+}
+
+.page-link:hover {
+  background-color: #007bff;
+  color: #fff;
+}
+
+.active .page-link {
+  background-color: #007bff;
+  color: white;
+  border-color: #007bff;
+}
+
+.disabled .page-link {
+  color: #ccc;
+  pointer-events: none;
+}

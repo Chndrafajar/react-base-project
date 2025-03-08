@@ -11,9 +11,10 @@ module.exports = {
   },
   mode: "development", // Ubah ke 'production' untuk build akhir
   devServer: {
-    static: "./dist",
+    static: [path.resolve(__dirname, "dist"), path.resolve(__dirname, "public")],
     port: 3000,
     open: true,
+    historyApiFallback: true,
   },
   resolve: {
     extensions: [".ts", ".tsx", ".js", ".jsx"],
